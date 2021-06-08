@@ -189,4 +189,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+  <select id="selectAllByName" parameterType="java.lang.String" resultType="com.aim.questionnaire.dao.entity.UserEntity">
+    SELECT id,username,password,status
+    FROM user_info
+    where username = #{username,jdbcType = VARCHAR}
+      AND status = "1"
+  </select>
 </mapper>
