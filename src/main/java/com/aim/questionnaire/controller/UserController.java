@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("/admin")
@@ -37,4 +39,31 @@ public class UserController {
         }
         return httpResponseEntity;
     }
+    @RequestMapping(value = "/addUserInfo",method = RequestMethod.POST)
+    public HttpResponseEntity createNewUser(@RequestBody UserEntity userEntity) throws ParseException {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        int code = userService.insertUser(userEntity);
+        if(code == 1){
+            httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        }else if(code == -1){
+            httpResponseEntity.setCode(Constans.USER_USERNAME_CODE);
+            httpResponseEntity.setMessage("插入失败，用户名已经存在");
+        } else  {
+            httpResponseEntity.setMessage("插入异常");
+            httpResponseEntity.setCode("777");
+        }
+        return httpResponseEntity;
+    }
+    @RequestMapping(value = "queryUserList")
+    public HttpResponseEntity queryUserList(){
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        List<Object> result = userService.queryUserList();
+        Map<String,List<Object>> res = new HashMap<>();
+        res.put("list",result);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(res);
+        return httpResponseEntity;
+    }
+
+
 }

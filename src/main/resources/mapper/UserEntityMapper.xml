@@ -195,4 +195,31 @@
     where username = #{username,jdbcType = VARCHAR}
       AND status = "1"
   </select>
+
+  <insert id="insertUser" parameterType="UserEntity">
+    INSERT INTO user_info(id,
+                          username,
+                          password,
+                          start_time,
+                          stop_time,
+                          status,
+                          created_by,
+                          creation_date,
+                          last_updated_by,
+                          last_update_date)
+    VALUES (#{username,jdbcType = VARCHAR},
+            #{username,jdbcType = VARCHAR},
+            #{password,jdbcType = VARCHAR},
+            #{startTime,jdbcType = TIMESTAMP},
+            #{stopTime,jdbcType = TIMESTAMP},
+            "1",
+            "admin",
+            #{startTime,jdbcType = TIMESTAMP},
+            "admin",
+            #{startTime,jdbcType = TIMESTAMP})
+  </insert>
+  <select id="selectUsers" resultType="map">
+    SELECT id,username,password,start_time as startTime,stop_time as stopTime,status
+    FROM user_info
+  </select>
 </mapper>

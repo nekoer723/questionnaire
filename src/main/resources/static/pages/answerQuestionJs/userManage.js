@@ -108,7 +108,6 @@ function TableInit() {
                                 'endTime': '',
                                 'status': ''
                             };
-
                             dataNewObj.id = userInfo[i].id;
                             dataNewObj.username = userInfo[i].username;
                             dataNewObj.password = userInfo[i].password;
