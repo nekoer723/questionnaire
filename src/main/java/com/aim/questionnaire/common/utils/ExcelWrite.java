@@ -32,7 +32,6 @@ public class ExcelWrite {
     //Excel 2007-2010版本
     private static XSSFWorkbook workbook1 = null;
     private static SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook(workbook1, 100);
-
     /**
      * 判断文件是否存在.
      * @param fileDir  文件路径

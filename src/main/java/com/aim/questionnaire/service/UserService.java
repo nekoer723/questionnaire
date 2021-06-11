@@ -26,6 +26,9 @@ public class UserService {
         if(userEntityMapper.selectAllByName(userEntity.getUsername())!=null){
             return -1;
         }
+        if(userEntity.getUsername()==null||userEntity.getPassword()==null){
+            return 0;
+        }
         if(userEntity.getUsername().length()<=0||
                 userEntity.getPassword().length()<=0){
             return  0;
@@ -38,14 +41,12 @@ public class UserService {
                //exception.printStackTrace();
                 return -2;
             }
-
         }
         return 1;
     }
-
-    public List<Object> queryUserList() {
-        List<Object> resultList = new ArrayList<Object>();
-        List<Map<String,Object>> proResult = userEntityMapper.selectUsers();
+    public List<Map<String,Object>> queryUserList(UserEntity userEntity) {
+        //List<Object> resultList = new ArrayList<Object>();
+        List<Map<String,Object>> proResult = userEntityMapper.selectUsers(userEntity);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for(Map<String,Object> userObj : proResult) {
             String start = ""; String stop = "";
@@ -53,13 +54,13 @@ public class UserService {
                 start = simpleDateFormat.format(userObj.get("startTime"));
                 stop = simpleDateFormat.format(userObj.get("stopTime"));
             }catch (Exception e){
-                start = "值为空！";
-                stop = "值为空";
+                start = "";
+                stop = "";
             }
             userObj.put("startTime",start);
             userObj.put("stopTime",stop);
-            resultList.add(userObj);
+            //resultList.add(userObj);
         }
-        return resultList;
+        return proResult;
     }
 }

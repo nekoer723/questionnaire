@@ -1,5 +1,7 @@
 package com.aim.questionnaire.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +52,7 @@ public class UserEntity implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date startTime;
 
     /**
@@ -59,6 +62,7 @@ public class UserEntity implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date stopTime;
 
     /**
@@ -86,6 +90,7 @@ public class UserEntity implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date creationDate;
 
     /**
@@ -104,6 +109,7 @@ public class UserEntity implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date lastUpdateDate;
 
 

@@ -19,6 +19,6 @@ public interface UserEntityMapper {
 
     void insertUser(UserEntity userEntity);
 
-    List<Map<String,Object>> selectUsers();
+    List<Map<String,Object>> selectUsers(UserEntity userEntity);
 
 }

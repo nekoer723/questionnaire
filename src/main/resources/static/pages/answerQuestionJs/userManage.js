@@ -1,6 +1,62 @@
 /**
  * Created by Amy on 2018/8/9.
  */
+//批量导出
+function export2(){
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = "arraybuffer";
+    xhr.open("POST","/admin/selectUserListToExcel",true);
+    xhr.onload = function (){
+        const blob =  new Blob([this.response],
+            {type:"application/vnd.ms-excel"});
+        const  objectUrl = URL.createObjectURL(blob);
+        const  a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display:none";
+        a.href = objectUrl;
+        a.download = "excel数据表";
+        a.click();
+        document.body.removeChild(a);
+        return;
+    };
+    xhr.setRequestHeader("Content-type","application/json");
+    var username = $("#keyWord").val();
+    var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+        username: username
+    };
+    xhr.send(JSON.stringify(temp))
+}
+//批量导入
+function batchInsert(){
+    $("#file").trigger("click");
+}
+function getFile(){
+    var file = document.getElementById("file").files[0];
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST","/admin/addUserInfoList");
+    xhr.setRequestHeader("Content-type","application/json");
+    let reader = new FileReader();
+    reader.onload = function (e){
+        var data = e.target.result;
+        var workbook = XLSX.read(data,{type: 'binary'});
+        var sheetNames = workbook.SheetNames;
+        let worksheet = workbook.Sheets[sheetNames[0]];
+        let userList = XLSX.utils.sheet_to_json(worksheet);
+        xhr.send(JSON.stringify({"userList": userList}));
+        //layer.msg("表格中数据有误！", {icon: 2});
+        console.log(userList);
+        xhr.onreadystatechange = function (){
+            if(xhr.readyState === 4&&xhr.status===200){
+                var res = JSON.parse(xhr.responseText);
+                if(res.code === "666"){
+                    layer.msg("批量插入成功", {icon: 1});
+                    document.getElementById("userManager").click();
+                }
+            }
+        }
+    };
+    reader.readAsBinaryString(file);
+}
 $(function () {
     isLoginFun();
     header();
@@ -133,12 +189,12 @@ function TableInit() {
 
     // 得到查询的参数
     function queryParams(params) {
-        var userName = $("#keyWord").val();
+        var username = $("#keyWord").val();
         //console.log(userName);
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             pageNum: params.pageNumber,
             pageSize: params.pageSize,
-            userName: userName
+            username: username
         };
         return JSON.stringify(temp);
     }
