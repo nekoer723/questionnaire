@@ -7,9 +7,29 @@
     <link rel="stylesheet" href="answerQuestionCss/login.css">
 </head>
 <body id="body1" class="fp-viewing">
+
+
+
+
     <div class="fullpage-wrapper">
         <div class="fullpage-main"></div>
-        <div id="divSojump" class="validate-box">
+        <div id="divSojump" class="validate-box" style="text-align: center">
+
+
+
+            <!--描绘video截图-->
+            <canvas id="canvas" width="180" height="180" style="display: none"></canvas>
+            <div class="automatic-box">
+                <div style="float: left">
+                    <video id="video" width="180" height="180" autoplay="autoplay" style="display: none"></video>
+                </div>
+                <div style="float: left">
+                    <button id="capture" style="display:none">登录</button>
+                </div>
+                <div style="float: left">
+                    <button id="stop" style="display: none">停止</button>
+                </div>
+            </div>
             <fieldset class="validate-wrapper" style="padding: 0 50px;">
                 <h1 id="hlogintxt" class="validate-caption">登录</h1>
                 <ul>
@@ -26,7 +46,9 @@
                 </ul>
             </fieldset>
             <fieldset style="text-align: center; margin-top: 60px; padding: 0 50px;">
-                <button name="LoginButton" id="LoginButton" class="submitbutton" onclick="login()" onmouseover="this.className='submitbutton submitbutton_hover';" onmouseout="this.className='submitbutton';" style="color:White;">登 录</button>
+                <button name="LoginButton" id="LoginButton" class="submitbutton" onclick="login()" onmouseover="this.className='submitbutton submitbutton_hover';" onmouseout="this.className='submitbutton';" style="color:White;margin-bottom: 10px">登 录</button>
+                <span style="color: red; line-height: 28px;"></span>
+                <button name="LoginButton" id="LoginButton2" class="submitbutton" onclick="loginFace()" onmouseover="this.className='submitbutton submitbutton_hover';" onmouseout="this.className='submitbutton';" style="color:White;">人脸识别</button>
                 <span style="color: red; line-height: 28px;"></span>
             </fieldset>
         </div>
@@ -37,5 +59,64 @@
     <script src="../plugins/cookie/jquery.cookie.js"></script>
     <script src="../common/common.js"></script>
     <script src="answerQuestionJs/login.js"></script>
+
+
+<script>
+    // let video = document.getElementById("video");
+    // // let canvas = document.getElementById("canvas");
+    // // let context = canvas.getContext("2d");
+    //
+    // // 老的浏览器可能根本没有实现 mediaDevices，所以我们可以先设置一个空的对象
+    // if (navigator.mediaDevices === undefined) {
+    //     navigator.mediaDevices = {};
+    // }
+    //
+    // // 一些浏览器部分支持 mediaDevices。我们不能直接给对象设置 getUserMedia
+    // // 因为这样可能会覆盖已有的属性。这里我们只会在没有getUserMedia属性的时候添加它。
+    // if (navigator.mediaDevices.getUserMedia === undefined) {
+    //     navigator.mediaDevices.getUserMedia = function (constraints) {
+    //
+    //         // 首先，如果有getUserMedia的话，就获得它
+    //         var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    //
+    //         // 一些浏览器根本没实现它 - 那么就返回一个error到promise的reject来保持一个统一的接口
+    //         if (!getUserMedia) {
+    //             return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+    //         }
+    //
+    //         // 否则，为老的navigator.getUserMedia方法包裹一个Promise
+    //         return new Promise(function (resolve, reject) {
+    //             getUserMedia.call(navigator, constraints, resolve, reject);
+    //         });
+    //     }
+    // }
+    //
+    // //默认使用前摄像头，强制使用后置摄像头如下设置
+    // // let constraints = {video: { facingMode: { exact: "environment" } }};
+    // let constraints = {video: true};
+    // navigator.mediaDevices.getUserMedia(constraints)
+    //     .then(function (stream) {
+    //         // 旧的浏览器可能没有srcObject
+    //         if ("srcObject" in video) {
+    //             video.srcObject = stream;
+    //         } else {
+    //             // 防止在新的浏览器里使用它，应为它已经不再支持了
+    //             video.src = window.URL.createObjectURL(stream);
+    //         }
+    //         video.onloadedmetadata = function (e) {
+    //             video.play();
+    //         };
+    //     })
+    //     .catch(function (err) {
+    //         console.log(err.name + ": " + err.message);
+    //     });
+
+    //注册拍照按钮的单击事件
+    // document.getElementById("capture").addEventListener("click", function () {
+    //     //绘制画面
+    //     context.drawImage(video, 0, 0, 640, 480);// 保存base64
+    // });
+</script>
+
 </body>
 </html>
