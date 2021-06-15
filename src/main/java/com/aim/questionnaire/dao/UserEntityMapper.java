@@ -21,4 +21,7 @@ public interface UserEntityMapper {
 
     List<Map<String,Object>> selectUsers(UserEntity userEntity);
 
+    List<Map<String, Object>> selectEachUsers(UserEntity userEntity);
+
+    int getUserTotal(UserEntity userEntity);
 }

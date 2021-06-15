@@ -63,4 +63,27 @@ public class UserService {
         }
         return proResult;
     }
+
+    public List<Map<String, Object>> queryEachList(UserEntity userEntity) {
+        List<Map<String,Object>> proResult = userEntityMapper.selectEachUsers(userEntity);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(Map<String,Object> userObj : proResult) {
+            String start = ""; String stop = "";
+            try {
+                start = simpleDateFormat.format(userObj.get("startTime"));
+                stop = simpleDateFormat.format(userObj.get("stopTime"));
+            }catch (Exception e){
+                start = "";
+                stop = "";
+            }
+            userObj.put("startTime",start);
+            userObj.put("stopTime",stop);
+            //resultList.add(userObj);
+        }
+        return proResult;
+    }
+
+    public int getUserTotal(UserEntity userEntity) {
+        return userEntityMapper.getUserTotal(userEntity);
+    }
 }

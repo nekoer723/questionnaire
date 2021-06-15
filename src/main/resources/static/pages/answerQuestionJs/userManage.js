@@ -90,13 +90,13 @@ function TableInit() {
     //初始化Table
     oTableInit.Init = function () {
         $('#userTable').bootstrapTable({
-            url: httpRequestUrl + '/admin/queryUserList',         //请求后台的URL（*）
+            url: httpRequestUrl + '/admin/queryEachList',         //请求后台的URL（*）
             method: 'POST',                      //请求方式（*）
             striped: true,                      //是否显示行间隔色
             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true,                   //是否显示分页（*）
             sortOrder: "asc",                   //排序方式
-            queryParamsType: '',
+            queryParamsType: 'limit',
             dataType: 'json',
             paginationShowPageGo: true,
             showJumpto: true,
@@ -194,6 +194,9 @@ function TableInit() {
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             pageNum: params.pageNumber,
             pageSize: params.pageSize,
+            limit : params.limit,
+            offset : params.offset,
+            page: (params.offset/params.limit) + 1,
             username: username
         };
         return JSON.stringify(temp);

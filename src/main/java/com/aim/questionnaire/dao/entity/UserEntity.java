@@ -1,12 +1,13 @@
 package com.aim.questionnaire.dao.entity;
 
+import com.aim.questionnaire.beans.Page;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class UserEntity implements Serializable {
+public class UserEntity extends Page implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /**

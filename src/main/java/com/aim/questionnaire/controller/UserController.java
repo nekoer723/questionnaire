@@ -70,6 +70,19 @@ public class UserController {
         return httpResponseEntity;
     }
 
+    @RequestMapping(value = "queryEachList",method = RequestMethod.POST)
+    public HttpResponseEntity queryEachList(@RequestBody(required = false) UserEntity userEntity){
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        Map<String, Object> res = new HashMap<>();
+        int total = userService.getUserTotal(userEntity);
+        List<Map<String, Object>> maps = userService.queryEachList(userEntity);
+        res.put("total",total);
+        res.put("list", maps);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setData(res);
+        return httpResponseEntity;
+    }
+
     @RequestMapping(value = "selectUserListToExcel", method = RequestMethod.POST)
     public void batchExport(@RequestBody(required = false) UserEntity userEntity, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> maps = userService.queryUserList(userEntity);
