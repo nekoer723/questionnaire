@@ -6,6 +6,7 @@ import com.aim.questionnaire.common.utils.Base64Util;
 import com.aim.questionnaire.common.utils.ExcelUtil;
 import com.aim.questionnaire.common.utils.GsonUtils;
 import com.aim.questionnaire.common.utils.HttpUtil;
+import com.aim.questionnaire.dao.entity.AutoAnswerEntity;
 import com.aim.questionnaire.dao.entity.UserEntity;
 import com.aim.questionnaire.service.UserService;
 import com.alibaba.fastjson.JSONObject;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/admin")
@@ -190,4 +190,6 @@ public class UserController {
         httpResponseEntity.setCode("666");
         return httpResponseEntity;
     }
+
+
 }

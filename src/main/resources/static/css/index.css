@@ -1176,7 +1176,7 @@ button.close {
   z-index: 2;
   border-radius: 14px;
   background-color: #fff;
-  min-height: 390px;
+  min-height: 490px;
 }
 .validate-box .validate-wrapper,
 .validate-box .submit-wrapper {

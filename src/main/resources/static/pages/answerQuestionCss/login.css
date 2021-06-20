@@ -39,3 +39,13 @@
     border: none !important;
     cursor: pointer;
 }
+#LoginButton3{
+    text-align: center;
+    width: 100% !important;
+    height: 46px !important;
+    font-size: 20px !important;
+    border-radius: 100px !important;
+    background-color: #fa911e;
+    border: none !important;
+    cursor: pointer;
+}
